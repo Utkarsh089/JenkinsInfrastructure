@@ -1,0 +1,23 @@
+version: '3'
+
+        services:
+                myjenkins:
+                        image: jenkins:latest
+                        volumes:
+                                - jenkins_storage:/var/jenkins_home
+                        restart: always
+                        ports:
+                                - 8080:8080
+                                - 50000:5000
+
+
+                mywebserver:
+                        image: vimal13/webserver:v1
+                        restart: always
+                        volumes:
+                                - jenkins_storage:/var/www/html
+                        ports:
+                                - 80:80
+
+volumes:
+        jenkins_storage:
